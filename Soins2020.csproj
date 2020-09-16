@@ -47,7 +47,6 @@
     <Compile Include="classesMetiers\Intervenant.cs" />
     <Compile Include="classesMetiers\IntervenantExterne.cs" />
     <Compile Include="classesMetiers\Prestation.cs" />
-    <Compile Include="XML\main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="classesMetiers\Traitement.cs" />

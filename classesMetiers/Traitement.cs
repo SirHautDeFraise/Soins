@@ -72,8 +72,9 @@ namespace Soins
         /// <param name="racine">2lément racine du fichier XML à partir duquel la recherche d'éléments va s'effectuer</param>
         private static void Initialiser(XmlElement racine)
         {
-            LesDossiers = racine.ChildNodes...
-            
+            lesDossiers = racine.ChildNodes[0].ChildNodes;
+            lesPrestations = racine.ChildNodes[1].ChildNodes;
+            lesIntervenants = racine.ChildNodes[2].ChildNodes;
         }
 
         /// <summary>
@@ -84,10 +85,10 @@ namespace Soins
         /// </summary>
         public static void ChargeFichierXML()
         {
-            XmlDocument SoinsXml = new XmlDocument();
+            XmlDocument soinsXml = new XmlDocument();
             string fichier = ConfigurationManager.AppSettings["chemin"];
-            SoinsXml.Load(fichier);
-            XmlElement racine = //
+            soinsXml.Load(fichier);
+            XmlElement racine = 
             Initialiser(racine);
             
         }
@@ -117,11 +118,9 @@ namespace Soins
         {
             string nom = unDossierXML.ChildNodes[0].InnerText;
             string prenom = unDossierXML.ChildNodes[1].InnerText;
-            
             DateTime dateNaissance = Traitement.XmlToDateTime((XmlElement)unDossierXML.ChildNodes[2]);
-            if (unDossierXML.GetElementsByTagName("dossierprestations").Count == 0){       
-            
-               // pas de prestations
+            if (unDossierXML.GetElementsByTagName("dossierprestations").Count == 0){
+                return new Dossier(nom, prenom, dateNaissance);
             }
             else
             {
@@ -146,8 +145,9 @@ namespace Soins
         private static Prestation XmlToPrestation(XmlElement unePrestationXML)
         {
             string libellePrestation = unePrestationXML.ChildNodes[0].InnerText;
-            ...
-            Intervenant unIntervenant = Traitement.XmlToIntervenant(unItervenantXML);
+            DateTime datePrestation = Traitement.XmlToDateTime((XmlElement)unePrestationXML.ChildNodes[1]);
+            
+            Intervenant unIntervenant = Traitement.XmlToIntervenant(unIntervenantXML);
 
             return new Prestation(libellePrestation, datePrestation, unIntervenant);
         }
