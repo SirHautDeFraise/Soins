@@ -1,4 +1,4 @@
-using ClassesMetier;
+using Soins2020.classesMetiers;
 using System;
 using System.Collections.Generic;
 
@@ -12,19 +12,19 @@ namespace Soins
                 List<Dossier> lesDossiers = new List<Dossier>();
                 // Chargement du fichier et initialisation des collections de noeuds XML
                 //lesDossiers, lesPrestations, lesIntervenants
-                TraitementXML.ChargeFichierXML();
+                Traitement.ChargeFichierXML();
                 // Chargement de la collection des objets de la classe Dossier
-                lesDossiers = TraitementXML.XmlToDossiers();
+                lesDossiers = Traitement.XmlToDossiers();
                 Console.WriteLine("Nombre de dossiers : " + lesDossiers.Count);
                 // Affichage des dossiers
-                TraitementXML.AfficherDossiers(lesDossiers);
+                Traitement.AfficherDossiers(lesDossiers);
 
                 // Gestion des intervenants
                 Console.WriteLine("\n\n----- Gestion des intervenants  -----");
                 // Chargement de la collection des objets de la classe Intervenant et IntevenantExterne
-                List<Intervenant> lesIntervenants = TraitementXML.XmlToIntervenants();
+                List<Intervenant> lesIntervenants = Traitement.XmlToIntervenants();
                 // affichage des intervenants 
-                TraitementXML.AfficherIntervenants(lesIntervenants);
+                Traitement.AfficherIntervenants(lesIntervenants);
 
             }
             catch(Exception ex)

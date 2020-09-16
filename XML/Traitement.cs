@@ -1,4 +1,4 @@
-using ClassesMetier;
+using Soins2020.classesMetiers;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace Soins
 {
-    abstract class TraitementXML
+    abstract class Traitement
     {
         private static XmlNodeList lesDossiers;
         private static XmlNodeList lesPrestations;
@@ -116,8 +116,9 @@ namespace Soins
         public static Dossier XmlToDossier(XmlElement unDossierXML)
         {
             string nom = unDossierXML.ChildNodes[0].InnerText;
+            string prenom = unDossierXML.ChildNodes[1].InnerText;
             
-            DateTime dateNaissance = TraitementXML.XmlToDateTime((XmlElement)unDossierXML.ChildNodes[2]);
+            DateTime dateNaissance = Traitement.XmlToDateTime((XmlElement)unDossierXML.ChildNodes[2]);
             if (unDossierXML.GetElementsByTagName("dossierprestations").Count == 0){       
             
                // pas de prestations
@@ -146,7 +147,7 @@ namespace Soins
         {
             string libellePrestation = unePrestationXML.ChildNodes[0].InnerText;
             ...
-            Intervenant unIntervenant = TraitementXML.XmlToIntervenant(unItervenantXML);
+            Intervenant unIntervenant = Traitement.XmlToIntervenant(unItervenantXML);
 
             return new Prestation(libellePrestation, datePrestation, unIntervenant);
         }
@@ -160,6 +161,8 @@ namespace Soins
         private static Intervenant XmlToIntervenant(XmlElement unIntervenantXML)
         {
             string nomIntervenant = unIntervenantXML.ChildNodes[0].InnerText;
+            string prenomIntervenant = unIntervenantXML.ChildNodes[1].InnerText;
+            string specialiteIntervenant
             
             if (unIntervenantXML.ChildNodes.Count == 2)
             {
@@ -181,7 +184,7 @@ namespace Soins
         public static List<Intervenant> XmlToIntervenants()
         {
             List<Intervenant> lesIntervenants = new List<Intervenant>();
-            foreach (XmlElement unIntervenantXml in TraitementXML.LesIntervenants)
+            foreach (XmlElement unIntervenantXml in Traitement.LesIntervenants)
             {
                 
             }
@@ -269,7 +272,7 @@ namespace Soins
         {
             foreach (Dossier unDossier in lesDossiers)
             {
-                TraitementXML.AfficherDossier(unDossier);
+                Traitement.AfficherDossier(unDossier);
             }
 
         }
