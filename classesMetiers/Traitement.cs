@@ -162,7 +162,6 @@ namespace Soins
         {
             string nomIntervenant = unIntervenantXML.ChildNodes[0].InnerText;
             string prenomIntervenant = unIntervenantXML.ChildNodes[1].InnerText;
-            string specialiteIntervenant
             
             if (unIntervenantXML.ChildNodes.Count == 2)
             {
@@ -171,8 +170,10 @@ namespace Soins
             }
             else
             {
-				// c'est un spécialiste
-                
+                // c'est un spécialiste
+                string specialiteIntervenant = unIntervenantXML.ChildNodes[2].InnerText;
+                string adresseIntervenant = unIntervenantXML.ChildNodes[3].InnerText;
+                string telIntervenant = unIntervenantXML.ChildNodes[4].InnerText;
                 return new IntervenantExterne(nomIntervenant, prenomIntervenant, specialiteIntervenant, adresseIntervenant, telIntervenant);
             }
         }
