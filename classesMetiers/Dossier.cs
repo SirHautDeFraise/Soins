@@ -70,10 +70,12 @@ namespace Soins2020.classesMetiers
         {
             try
             {
-                this.mesPrestations.Add(new Prestation(unLibelle, date, unIntervenant));
+                Prestation unePrestation = new Prestation(unLibelle, date, unIntervenant);
+                this.mesPrestations.Add(unePrestation);
             }
             catch (Exception ex)
             {
+
                 throw new Exception(ex.Message);
             }
         }
