@@ -88,7 +88,7 @@ namespace Soins
             XmlDocument soinsXml = new XmlDocument();
             string fichier = ConfigurationManager.AppSettings["chemin"];
             soinsXml.Load(fichier);
-            XmlElement racine = 
+            XmlElement racine = soinsXml.DocumentElement; 
             Initialiser(racine);
             
         }
@@ -102,9 +102,9 @@ namespace Soins
         public static List<Dossier> XmlToDossiers()
         {
             List<Dossier> lesDossiers = new List<Dossier>();
-            foreach (...)
+            foreach (XmlElement unDossier in Traitement.LesDossiers)
             {
-               
+                lesDossiers.Add(Traitement.XmlToDossier(unDossier));
             }
             return lesDossiers;
         }
@@ -125,13 +125,15 @@ namespace Soins
             else
             {
 				// au moins une prestation
-                XmlNodeList lesPrestations = (unDossierXML.GetElementsByTagName("dossierprestations")[0]).ChildNodes;
-                List<Prestation> lesPrestationsDuDossier = new List<Prestation>();
-                foreach (XmlElement unePrestation in lesPrestations)
+                XmlNodeList mesPrestations = (unDossierXML.GetElementsByTagName("dossierprestations")[0]).ChildNodes;
+                List<Prestation> mesPrestationsDuDossier = new List<Prestation>();
+                foreach (XmlElement unePrestation in mesPrestations)
                 {
-                   
+                    int idprestation = Convert.ToInt16(unePrestation.GetAttribute("idprestation"));
+                    XmlElement unePrestationXml = Traitement.CherchePrestation(idprestation);
+                    mesPrestationsDuDossier.Add(Traitement.XmlToPrestation(unePrestationXml));
                 }
-                return new Dossier(nom, prenom, dateNaissance, lesPrestationsDuDossier);
+                return new Dossier(nom, prenom, dateNaissance, mesPrestationsDuDossier);
 
             }
         }
@@ -146,7 +148,8 @@ namespace Soins
         {
             string libellePrestation = unePrestationXML.ChildNodes[0].InnerText;
             DateTime datePrestation = Traitement.XmlToDateTime((XmlElement)unePrestationXML.ChildNodes[1]);
-            
+            int idIntervenant = Convert.ToInt16(unePrestationXML.GetAttribute("idintervenant"));
+            XmlElement unIntervenantXML = Traitement.ChercheIntervenant(idIntervenant);
             Intervenant unIntervenant = Traitement.XmlToIntervenant(unIntervenantXML);
 
             return new Prestation(libellePrestation, datePrestation, unIntervenant);
@@ -187,7 +190,7 @@ namespace Soins
             List<Intervenant> lesIntervenants = new List<Intervenant>();
             foreach (XmlElement unIntervenantXml in Traitement.LesIntervenants)
             {
-                
+                lesIntervenants.Add(Traitement.XmlToIntervenant(unIntervenantXml));
             }
             return lesIntervenants;
         }
@@ -203,7 +206,7 @@ namespace Soins
             int idIntervenant = Convert.ToInt16(unIntervenantXml.GetAttribute("idintervenant"));
             foreach(XmlElement unePrestationXml in LesPrestations)
             {
-                
+                unIntervenant.ajoutePrestation(Traitement.XmlToPrestation(unePrestationXml));
             }
             return unIntervenant;
         }
@@ -231,13 +234,13 @@ namespace Soins
         private static XmlElement CherchePrestation(int idPrestation)
         {
             int i = 0;
-            while (Convert.ToInt16(((XmlElement)lesPrestations[i]).GetAttribute("idprestation"))!=idPrestation && i<LesIntervenants.Count )
+            while (Convert.ToInt16(((XmlElement)lesPrestations[i]).GetAttribute("idprestation"))!=idPrestation && i<LesPrestations.Count )
             {
                 i++;   
             }
             if (Convert.ToInt16(((XmlElement)lesPrestations[i]).GetAttribute("idprestation")) == idPrestation)
             {
-                
+                return (XmlElement)lesPrestations[i];
             }
             else
             {
@@ -252,11 +255,11 @@ namespace Soins
         private static XmlElement ChercheIntervenant(int idIntervenant)
         {
             int i = 0;
-            while (...)
+            while (Convert.ToInt16(((XmlElement)lesIntervenants[i]).GetAttribute("idintervenant")) != idIntervenant && i < LesIntervenants.Count)
             {
-               
+                i++;
             }
-            if (//)
+            if (Convert.ToInt16(((XmlElement)lesIntervenants[i]).GetAttribute("idintervenant")) == idIntervenant)
             {
                 return (XmlElement)LesIntervenants[i];
             }
@@ -288,7 +291,7 @@ namespace Soins
         {
             foreach (Intervenant unIntervenant in lesIntervenants)
             {
-                Console.WriteLine(unIntervenant.AfficheIntervenantComplet() + "\n");
+               // Console.WriteLine(unIntervenant.AfficheIntervenantComplet() + "\n");
             }
         }
         /// <summary>
@@ -299,13 +302,13 @@ namespace Soins
         public static void AfficherDossier(Dossier unDossier)
         {
             Console.WriteLine("----- Début dossier --------------");
-            Console.WriteLine("Nom : " + unDossier.NomPatient + " Prenom : " + unDossier.PrenomPatient + " Date de naissance : " + unDossier.DateDeNaissancePatient.ToShortDateString());
+            Console.WriteLine("Nom : " + unDossier.NomPatient + " Prenom : " + unDossier.PrenomPatient + " Date de naissance : " + unDossier.DateNaissancePatient.ToShortDateString());
             Console.WriteLine("\tNombre de prestations : " + unDossier.MesPrestations.Count);
             if (unDossier.MesPrestations.Count > 0)
             {
                 foreach (Prestation unePrestation in unDossier.MesPrestations)
                 {
-                    Console.WriteLine("\t" + unePrestation.Libelle + " - " + unePrestation.DateHeureSoin.ToString() + " - " + unePrestation.UnIntervenant);
+                    Console.WriteLine("\t" + unePrestation.Libelle + " - " + unePrestation.DateSoin.ToString() + " - " + unePrestation.L_Intervenant);
                 }
                 Console.WriteLine("nombre de jours de soins : " + unDossier.getNbJoursSoins());
                 Console.WriteLine("nombre de prestations externes : " + unDossier.getNbPrestationsExternes());

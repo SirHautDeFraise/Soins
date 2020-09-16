@@ -11,7 +11,16 @@ namespace Soins2020.classesMetiers
         readonly string nomPatient;
         readonly string prenomPatient;
         readonly DateTime dateNaissancePatient;
-        List<Prestation> mesPrestations;
+        readonly List<Prestation> mesPrestations;
+
+        public string NomPatient => nomPatient;
+
+        public string PrenomPatient => prenomPatient;
+
+        public DateTime DateNaissancePatient => dateNaissancePatient;
+
+        internal List<Prestation> MesPrestations => mesPrestations;
+
         /// <summary>
         /// Constructeur de la classe Dossier avec plusieurs Prestations
         /// </summary>
@@ -71,7 +80,7 @@ namespace Soins2020.classesMetiers
             try
             {
                 Prestation unePrestation = new Prestation(unLibelle, date, unIntervenant);
-                this.mesPrestations.Add(unePrestation);
+                this.MesPrestations.Add(unePrestation);
             }
             catch (Exception ex)
             {
@@ -88,7 +97,7 @@ namespace Soins2020.classesMetiers
             try
             {
                 int cpt = 0;
-                foreach (Prestation maPrestation in mesPrestations)
+                foreach (Prestation maPrestation in MesPrestations)
                 {
                     if (maPrestation.L_Intervenant.GetType().ToString() == "Soins2018.classesMetiers.IntervenantExterne")
                     {
@@ -111,7 +120,7 @@ namespace Soins2020.classesMetiers
         {
             try
             {
-                return this.mesPrestations.Count;
+                return this.MesPrestations.Count;
             }
             catch (Exception ex)
             {
@@ -128,13 +137,13 @@ namespace Soins2020.classesMetiers
             {
                 int cpt = 1;
                 Prestation unePrestation;
-                if (this.mesPrestations.Count == 0)
+                if (this.MesPrestations.Count == 0)
                 {
                     return 0;
                 }
-                this.mesPrestations.Sort((x, y) => DateTime.Compare(y.DateSoin.Date, x.DateSoin.Date));
-                unePrestation = this.mesPrestations[0];
-                foreach (Prestation maPrestation in this.mesPrestations)
+                this.MesPrestations.Sort((x, y) => DateTime.Compare(y.DateSoin.Date, x.DateSoin.Date));
+                unePrestation = this.MesPrestations[0];
+                foreach (Prestation maPrestation in this.MesPrestations)
                 {
                     cpt = cpt + maPrestation.compareTo(unePrestation);
                     unePrestation = maPrestation;
@@ -153,7 +162,7 @@ namespace Soins2020.classesMetiers
             try
             {
                 int cpt = 1;
-                if (this.mesPrestations.Count == 0)
+                if (this.MesPrestations.Count == 0)
                 {
                     return 0;
                 }
