@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--  <!DOCTYPE employes SYSTEM "soins.dtd">  -->
+<root>
+    <dossiers>
+        <dossier>
+            <nom>Robert</nom>
+            <prenom>Jean</prenom>
+            <datenaissance>
+                <yyyy>1980</yyyy>
+                <mm>12</mm>
+                <dd>3</dd>
+            </datenaissance>
+                
+        </dossier>
+        <dossier>
+            <nom>Blanc</nom>
+            <prenom>Sophie</prenom>
+            <datenaissance>
+                <yyyy>1995</yyyy>
+                <mm>9</mm>
+                <dd>14</dd>
+            </datenaissance>
+        </dossier>
+    </dossiers>
+
+
+</root>

@@ -47,12 +47,17 @@
     <Compile Include="classesMetiers\Intervenant.cs" />
     <Compile Include="classesMetiers\IntervenantExterne.cs" />
     <Compile Include="classesMetiers\Prestation.cs" />
+    <Compile Include="XML\main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XML\Traitement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="XML\soins.xml" />
+    <Content Include="XML\SoinsXML1.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
