@@ -217,9 +217,10 @@ namespace Soins
         {
             //XmlElement datenaissanceXml = (XmlElement)unDossier.ChildNodes[2];
             int annee = Convert.ToInt16(uneDateTimeXml.GetElementsByTagName("yyyy")[0].InnerText);
-            ...
+            int mois = Convert.ToInt16(uneDateTimeXml.GetElementsByTagName("mm")[0].InnerText);
+            int jour = Convert.ToInt16(uneDateTimeXml.GetElementsByTagName("dd")[0].InnerText);
+            int heurePrestation = Convert.ToInt16(uneDateTimeXml.GetElementsByTagName("dd")[0].InnerText);
 			int minutePrestation = ((uneDateTimeXml.GetElementsByTagName("mi")).Count == 0) ? (0) : (Convert.ToInt16(uneDateTimeXml.GetElementsByTagName("mi")[0].InnerText));
-			...
             return new DateTime(annee, mois, jour,heurePrestation, minutePrestation,0);
         }
         /// <summary>
