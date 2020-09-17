@@ -37,7 +37,7 @@ namespace Soins2020.classesMetiers
             foreach (Prestation prestation in mesPrestations)
             {
                 this.mesPrestations.Add(prestation);
-            }
+            }     
         }
 
         /// <summary>
