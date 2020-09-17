@@ -40,6 +40,7 @@ namespace Soins2020.classesMetiers
                 throw new Exception(ex.Message);
             }
         }
+
         /// <summary>
         /// getter sur l'attribut nom
         /// </summary>

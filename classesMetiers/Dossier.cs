@@ -28,36 +28,25 @@ namespace Soins2020.classesMetiers
         /// <param name="prenomPatient">Prénom du Patient</param>
         /// <param name="dateNaissancePatient">Date de naissance du Patient</param>
         /// <param name="mesPrestations">Les Prestations</param>
-        public Dossier(string nomPatient, string prenomPatient, DateTime dateNaissancePatient, List<Prestation> mesPrestations)
-        {
-            this.nomPatient = nomPatient;
-            this.prenomPatient = prenomPatient;
-            this.dateNaissancePatient = dateNaissancePatient;
-            this.mesPrestations = new List<Prestation>();
-            foreach (Prestation prestation in mesPrestations)
-            {
-                this.mesPrestations.Add(prestation);
-            }     
+        public Dossier(string nomPatient, string prenomPatient, DateTime dateNaissancePatient, List<Prestation> mesPrestations):this(nomPatient,prenomPatient,dateNaissancePatient)
+        { 
+            this.mesPrestations = mesPrestations;
         }
 
         /// <summary>
-        /// Constructeur de la classe Dossier avec une Prestations
+        /// Constructeur de la classe Dossier avec une Prestation
         /// </summary>
         /// <param name="nomPatient">Nom du Patient</param>
         /// <param name="prenomPatient">Prénom du Patient</param>
         /// <param name="dateNaissancePatient">Date de naissance du Patient</param>
-        /// <param name="unePrestations">Une Prestations</param>
-        public Dossier(string nomPatient, string prenomPatient, DateTime dateNaissancePatient, Prestation unePrestations)
+        /// <param name="unePrestation">Une Prestations</param>
+        public Dossier(string nomPatient, string prenomPatient, DateTime dateNaissancePatient, Prestation unePrestation):this(nomPatient,prenomPatient,dateNaissancePatient)
         {
-            this.nomPatient = nomPatient;
-            this.prenomPatient = prenomPatient;
-            this.dateNaissancePatient = dateNaissancePatient;
-            this.mesPrestations = new List<Prestation>();
-            this.mesPrestations.Add(unePrestations);
+            this.mesPrestations.Add(unePrestation);
         }
 
         /// <summary>
-        /// Constructeur de la classe Dossier avec aucune Prestations
+        /// Constructeur de la classe Dossier avec aucune Prestation
         /// </summary>
         /// <param name="nomPatient">Nom du Patient</param>
         /// <param name="prenomPatient">Prénom du Patient</param>
