@@ -33,9 +33,10 @@ namespace Soins2020.classesMetiers
             this.nomPatient = nomPatient;
             this.prenomPatient = prenomPatient;
             this.dateNaissancePatient = dateNaissancePatient;
+            this.mesPrestations = new List<Prestation>();
             foreach (Prestation prestation in mesPrestations)
             {
-                mesPrestations = new List<Prestation>();
+                this.mesPrestations.Add(prestation);
             }
         }
 
@@ -66,6 +67,7 @@ namespace Soins2020.classesMetiers
             this.nomPatient = nomPatient;
             this.prenomPatient = prenomPatient;
             this.dateNaissancePatient = dateNaissancePatient;
+            this.mesPrestations = new List<Prestation>();
         }
 
 

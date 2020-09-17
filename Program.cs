@@ -51,7 +51,6 @@ namespace Soins
                 List<Intervenant> lesIntervenants = Traitement.XmlToIntervenants();
                 // affichage des intervenants 
                 Traitement.AfficherIntervenants(lesIntervenants);
-
             }
             catch (Exception ex)
             {
